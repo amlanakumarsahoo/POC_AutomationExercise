@@ -2,10 +2,12 @@ import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { SignUpLoginPageOperations } from "../operations/SignUpLoginPageOperations";
 import { faker } from "@faker-js/faker";
+import { L } from "@faker-js/faker/dist/airline-CWrCIUHH";
 
 export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperations {
-    private readonly signupBtn: Locator;
     static doSignUpLogin: any;
+    private readonly signupBtn: Locator;
+    private readonly signUpLoginTab: Locator;
     private readonly userName: Locator;
     private readonly emailAddress: Locator;
     private readonly signUpButton: Locator;
@@ -44,7 +46,8 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     constructor(page: any) {
         super();
         this.page = page;
-        this.signupBtn=this.page.getByRole('link', { name: ' Signup / Login' })
+        this.signupBtn=page.getByRole('button', { name: 'Signup' })
+        this.signUpLoginTab=page.getByRole('link', { name: ' Signup / Login' })
         this.userName = page.getByRole('textbox', { name: 'Name' })
         this.emailAddress = page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address')
         this.signUpButton = page.locator('[data-qa="signup-button"]');
@@ -111,7 +114,7 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     }
     //Do sign up login
     async doSignUpLogin(): Promise<void | null> {
-        await this.signupBtn.click();
+        await this.signUpLoginTab.click();
     }
     //Verify creation of new user
     async verifyCreationOfNewUser(): Promise<boolean | null> {

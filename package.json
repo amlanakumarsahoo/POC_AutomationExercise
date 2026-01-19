@@ -1,0 +1,34 @@
+{
+  "name": "windsurf_playwright_practice",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "PlaywrightPractice/P1.ts",
+    "google-search": "npx ts-node PlaywrightPractice/google-search.ts",
+    "cucumber": "cucumber-js src/test/regression/googleSearch.feature --config cucumber.config.js",
+    "cucumber-regression": "cucumber-js src/test/regression/ --tags @Regression --config cucumber.config.js",
+    "cucumber-regression-json": "cucumber-js src/test/regression/ --tags @Regression --config cucumber.config.js --format json:results/playwright-report/cucumber-report.json",
+    "cleanup-reports": "node results/playwright-report/cleanup-reports.js",
+    "generate-bootstrap-report": "node results/playwright-report/generate-bootstrap-report.js",
+    "test-with-bootstrap-report": "npm run cleanup-reports && npm run cucumber-regression-json; npm run generate-bootstrap-report",
+    "test_amlana": "npm run cleanup-reports && cucumber-js src/test/regression/ --tags @Regression --config cucumber.config.js --format json:results/playwright-report/cucumber-report.json; npm run generate-bootstrap-report",
+    "test_Single": "cucumber-js src/test/regression/ --tags @TC018 --config cucumber.config.js"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^12.5.0",
+    "playwright": "^1.55.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.2.0",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.1",
+    "cucumber-html-reporter": "^7.2.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.2"
+  }
+}

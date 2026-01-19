@@ -1,0 +1,9 @@
+{
+    "cucumberautocomplete.steps": [
+        "./src/test/steps/**/*.ts"
+    ],
+    "cucumberautocomplete.syncFolder": "./src/test/steps/",
+    "cucumberautocomplete.staticGherkinCompletion": "true",
+    "cucumberautocomplete.staticGherkinValidation": "true",
+    "cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then|And|But)"
+}

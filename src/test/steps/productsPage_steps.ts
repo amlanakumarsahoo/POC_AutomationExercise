@@ -74,6 +74,8 @@ Then('User select brand from products page {string}', async function (brand: str
 });
 
 Then('selected brand products should be displayed {string}', async function (expectedTitle: string) {
+    page = (global as any).page;
+    const productsPage = await getProductsPageApp(page) as ProductsPageOperations;
     const actualTitle = await productsPage.verifySelectedBrandProducts();
     expect(actualTitle).toContain(expectedTitle);
 });

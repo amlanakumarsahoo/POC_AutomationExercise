@@ -37,7 +37,11 @@ export default defineConfig({
       mode: 'on',
       size: { width: 1280, height: 720 }
     },
-    viewport: { width: 1920, height: 1080 },
+    // viewport: { width: 1920, height: 1080 },
+    viewport: null,          // 👈 Disables fixed viewport
+  launchOptions: {
+    args: ['--start-maximized']  // 👈 Opens browser in full screen
+  }
   },
 
   projects: [

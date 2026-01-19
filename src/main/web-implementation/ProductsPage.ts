@@ -59,7 +59,8 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.searchProductBtn = page.getByRole('button', { name: '' })
         this.productQuantityInput = page.locator('#quantity');
         this.addToCartBtn = page.getByRole('button', { name: ' Add to cart' })
-        this.productTitle = page.locator('.title.text-center');
+        //this.productTitle = page.locator('.title.text-center');
+        this.productTitle = page.getByRole('heading', { name: /Brand - .* Products/ })
         this.searchProductsPageProductPrice = page.getByRole('heading', { name: 'Rs.' }).nth(1)
         this.searchProductsPageProductName = page.getByText('Blue Top').nth(1)
         this.searchProductsPageAddToCartBtn = page.getByText('Add to cart').nth(1)

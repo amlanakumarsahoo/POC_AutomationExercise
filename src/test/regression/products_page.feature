@@ -1,6 +1,6 @@
 Feature: automationexercise application products page functionality
 
-    @VerifyProductsPage_TC001 @Regression @TC008
+    @ProductsPage @VerifyProductsPage_TC001 @Regression @TC008
     Scenario: Verify All Products and product detail page
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -11,7 +11,7 @@ Feature: automationexercise application products page functionality
         Then User landed to product detail page
         Then User verifies product name, category, price, availability, condition, brand
 
-    @SearchProducts_TC002 @Regression @TC009
+    @ProductsPage @SearchProducts_TC002 @Regression @TC009
     Scenario: Verify Search Products functionality
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -22,7 +22,7 @@ Feature: automationexercise application products page functionality
         Then User landed to product detail page
         Then User verifies product name, category, price, availability, condition, brand
 
-    @Search_Products_and_verify_cart_after_login_TC003 @Regression @TC020
+    @ProductsPage @Search_Products_and_verify_cart_after_login_TC003 @Regression @TC020
     Scenario: Search Products and Verify Cart After Login
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -49,7 +49,7 @@ Feature: automationexercise application products page functionality
         Then title should match "Automation Exercise - All Products"
 
 
-    @AddReviewOnProduct_TC004 @Regression @TC021
+    @ProductsPage @AddReviewOnProduct_TC004 @Regression @TC021
     Scenario Outline:Add review on product
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -64,7 +64,7 @@ Feature: automationexercise application products page functionality
             | Amlana | amlana@gmail.com | Good   |
             | Ram    | ram@gmail.com    | Bad    |
 
-    @Add_to_cart_from_Recommended_items_TC005 @Regression @TC022
+    @ProductsPage @Add_to_cart_from_Recommended_items_TC005 @Regression @TC022
     Scenario: Add to cart from Recommended items
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -73,7 +73,7 @@ Feature: automationexercise application products page functionality
         Then User click on view cart link
         # Then User verifies product details
 
-    @View_Category_Products_TC006 @Regression @TC018
+    @ProductsPage @View_Category_Products_TC006 @Regression @TC018
     Scenario: View Category Products
         Given User Visits HomePage
         When User Observes HomePage Title

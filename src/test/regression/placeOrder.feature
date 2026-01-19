@@ -1,6 +1,6 @@
 Feature: automationexercise application Place Order functionality
 
-    @PlaceOrder_TC001 @Regression @TC014
+    @PlaceOrder @PlaceOrder_TC001 @Regression @TC014
     Scenario:Place Order: Register while Checkout
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -28,7 +28,7 @@ Feature: automationexercise application Place Order functionality
         Then user verify the account deleted confirmation
         Then user clicks on continue button
 
-    @VerifyAddressDetailsInCheckoutPage_TC002 @Regression @TC023
+    @PlaceOrder @VerifyAddressDetailsInCheckoutPage_TC002 @Regression @TC023
     Scenario: Verify address details in checkout page
         Given User Visits HomePage
         When User Observes HomePage Title   
@@ -58,7 +58,7 @@ Feature: automationexercise application Place Order functionality
         Then user verify the account deleted confirmation
         Then user clicks on continue button
 
-    @DownloadInvoiceAfterPurchaseOrder_TC003 @Regression @TC024
+    @PlaceOrder @DownloadInvoiceAfterPurchaseOrder_TC003 @Regression @TC024
     Scenario:Download Invoice after purchase order
         Given User Visits HomePage
         When User Observes HomePage Title   
@@ -93,7 +93,7 @@ Feature: automationexercise application Place Order functionality
         Then user verify the account deleted confirmation
         Then user clicks on continue button
   
-    @PlaceOrder_TC015 @Regression @TC015
+    @PlaceOrder @PlaceOrder_TC015 @Regression @TC015
     Scenario:Place Order: Register before Checkout
     Given User Visits HomePage
         When User Observes HomePage Title   
@@ -128,7 +128,7 @@ Feature: automationexercise application Place Order functionality
         Then user clicks on continue button
     
 
-    @PlaceOrder_TC016 @Regression @TC016
+    @PlaceOrder @PlaceOrder_TC016 @Regression @TC016
     Scenario:Place Order: Login before Checkout
        Given User Visits HomePage
         When User Clicks on Signup

@@ -2,7 +2,7 @@ Feature: automationexercise application Cart Page functionality
     As a User when I visit the automationexercise application
     I should see a valid Title
 
-    @CartPage_TC001 @Regression @TC011
+    @CartPage @CartPage_TC001 @Regression @TC011
     Scenario: Verify Subscription in Cart page
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -13,7 +13,7 @@ Feature: automationexercise application Cart Page functionality
         Then User enters email id and clicks on subscribe button
         Then User should be able to verify subscription message "You have been successfully subscribed!"
 
-    @AddProductsInCart_TC002 @Regression @TC012
+    @CartPage @AddProductsInCart_TC002 @Regression @TC012
     Scenario: Add Products in Cart
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -27,7 +27,7 @@ Feature: automationexercise application Cart Page functionality
         Then User navigates to cart page
         Then User verify price quantity and total price
 
-    @VerifyProductQuantityInCart_TC003 @Regression @TC013
+    @CartPage @VerifyProductQuantityInCart_TC003 @Regression @TC013
     Scenario Outline:Verify Product quantity in Cart
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -44,7 +44,7 @@ Feature: automationexercise application Cart Page functionality
             | quantity |
             | 4        |
 
-    @Remove_Products_From_Cart_TC004 @Regression @TC017
+    @CartPage @Remove_Products_From_Cart_TC004 @Regression @TC017
     Scenario: Remove Products From Cart
         Given User Visits HomePage
         When User Observes HomePage Title
@@ -61,7 +61,7 @@ Feature: automationexercise application Cart Page functionality
         Then User Observes HomePage Title
         Then title should match "Automation Exercise - All Products"
 
-    @View_Cart_Brand_Products_TC005 @Regression @TC019
+    @CartPage @View_Cart_Brand_Products_TC005 @Regression @TC019
     Scenario Outline: View & Cart Brand Products
         Given User Visits HomePage
         When User Observes HomePage Title

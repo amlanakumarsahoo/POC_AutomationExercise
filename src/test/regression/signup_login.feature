@@ -1,6 +1,6 @@
 Feature: automationexercise application user signup functionality
 
-    @UserSignUp_TC001 @Regression @TC001
+    @SignUp @UserSignUp_TC001 @Regression @TC001
     Scenario: New user signup to the automationexercise application
         Given User Visits HomePage
         When User Clicks on Signup
@@ -25,7 +25,7 @@ Feature: automationexercise application user signup functionality
         Then user clicks on continue button
         # Then user should be able to verify login page
 
-    @UserLogin_TC002 @Regression @TC002
+    @SignUp @UserLogin_TC002 @Regression @TC002
     Scenario:Login User with correct email and password
         Given User Visits HomePage
         When User Clicks on Signup
@@ -35,7 +35,7 @@ Feature: automationexercise application user signup functionality
             | amlana@gmail.com | Password@1 |
         Then user should be able to verify loggedin user
 
-    @UserLogin_TC003 @Regression @TC003
+    @SignUp @UserLogin_TC003 @Regression @TC003
     Scenario:Login User with incorrect email and password
         Given User Visits HomePage
         When User Clicks on Signup
@@ -45,7 +45,7 @@ Feature: automationexercise application user signup functionality
             | xa@gmail.com | Password@1 |
         Then user should be able to verify login failed confirmation
 
-    @UserLogin_TC004 @Regression @TC004
+    @SignUp @UserLogin_TC004 @Regression @TC004
     Scenario:Logout User
         Given User Visits HomePage
         When User Clicks on Signup
@@ -57,7 +57,7 @@ Feature: automationexercise application user signup functionality
         Then user logout from the application
         Then user should be on login page
 
-    @UserLogin_TC005 @Regression @TC005
+    @SignUp @UserLogin_TC005 @Regression @TC005
     Scenario Outline:Register User with existing email
         Given User Visits HomePage
         When User Clicks on Signup

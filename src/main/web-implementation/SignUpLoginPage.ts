@@ -239,9 +239,9 @@ export class SignUpLoginPage extends BasePage implements SignUpLoginPageOperatio
     }
     //Get user login info
     async getUserLoginInfo(emailAddress: string, password: string): Promise<void> {
-        await this.loginEmailAddress.fill(emailAddress,{timeout:5000});
-        await this.loginPassword.fill(password,{timeout:5000});
-        await this.loginButton.click({ timeout: 5000 }); 
+        await this.loginEmailAddress.fill(emailAddress,{timeout:8000});
+        await this.loginPassword.fill(password,{timeout:8000});
+        await this.loginButton.click({ timeout: 8000 }); 
     }
     //Verify logged in user
     async verifyLoggedInUser(): Promise<boolean | null> {

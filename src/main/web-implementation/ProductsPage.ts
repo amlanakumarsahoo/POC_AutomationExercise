@@ -182,11 +182,11 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     //Write review details
     async writeReviewDetails(name: string, email: string, review: string): Promise<void> {
         
-        if(await this.writeYourReviewHeader.isVisible()){
+        // if(await this.writeYourReviewHeader.isVisible()){
         await this.writeYourReviewName.fill(name);
         await this.writeYourReviewEmail.fill(email);
         await this.writeYourReviewReview.fill(review);
-    }
+   // }
     }
     //Submit review
     async submitReview(): Promise<void> {

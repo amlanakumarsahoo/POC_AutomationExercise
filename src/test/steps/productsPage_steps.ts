@@ -91,13 +91,17 @@ Then('User verifies product details', async function () {
     expect(await localProductsPage.verifySearchResultsProductDetails()).toBeTruthy();
 });
 
-Then('User write review details', async function (dataTable: DataTable) {
+Then('User write review details', async function (dataTable: DataTable) { 
     const data = dataTable.hashes()[0]; // Get first row of data table
-    await productsPage.writeReviewDetails(data.name, data.email, data.review);
+    const name = data.name;
+    const email = data.emailAddress;
+    const review = data.review;
+    await productsPage.writeReviewDetails(name, email, review);
 });
+
 Then('User submit review', async function () {
     await productsPage.submitReview();
-});
+}); 
 Then('User verifies review submitted', async function () {
     expect(await productsPage.verifyReviewSubmitted()).toBeTruthy();
 });

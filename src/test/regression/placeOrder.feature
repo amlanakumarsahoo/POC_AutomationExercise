@@ -33,6 +33,10 @@ Feature: automationexercise application Place Order functionality
         Given User Visits HomePage
         When User Observes HomePage Title   
         Then title should match "Automation Exercise"
+        Then User Clicks on Signup
+        Then user should be redirected to the signup page
+        Then user should be able to enter the fresh user
+        Then user should be able to enter the fresh email address
         Then user should be able to click on signup button
         Then user should be able to verify creation of new user
         Then user fill the user password information
@@ -67,6 +71,10 @@ Feature: automationexercise application Place Order functionality
         Then User verifies product name, category, price, availability, condition, brand
         Then User click on Add to cart button
         Then User click on continue shopping button
+        Then User Clicks on Signup
+        Then user should be redirected to the signup page
+         Then user should be able to enter the fresh user
+        Then user should be able to enter the fresh email address
         Then user should be able to click on signup button
         Then user should be able to verify creation of new user
         Then user fill the user password information
@@ -98,7 +106,11 @@ Feature: automationexercise application Place Order functionality
     Given User Visits HomePage
         When User Observes HomePage Title   
         Then title should match "Automation Exercise"
-        Then user should be able to click on signup button
+        Then User Clicks on Signup
+        Then user should be redirected to the signup page
+        Then user should be able to enter the fresh user
+        Then user should be able to enter the fresh email address
+        Then user should be able to click on signup button      
         Then user should be able to verify creation of new user
         Then user fill the user password information
         Then user fill the user DOB information

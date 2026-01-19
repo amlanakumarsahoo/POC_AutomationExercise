@@ -140,7 +140,7 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         try {
             brandName = brandName.trim();
             const brand = `//a[@href='/brand_products/${brandName}']`;
-            const brandElement = this.page.locator(brand);
+            const brandElement = this.page.locator(brand, { timeout: 5000 });
 
             // Wait for the brand element to be visible
             await brandElement.waitFor({ state: 'visible', timeout: 10000 });

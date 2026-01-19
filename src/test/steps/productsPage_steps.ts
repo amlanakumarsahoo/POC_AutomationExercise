@@ -68,6 +68,8 @@ Then('User click on Add to cart button', async function () {
 });
 
 Then('User select brand from products page {string}', async function (brand: string) {
+    page = (global as any).page;
+    const productsPage = await getProductsPageApp(page) as ProductsPageOperations;
     await productsPage.selectBrandFromProductsPage(brand);
 });
 

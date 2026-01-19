@@ -3,13 +3,13 @@ node_modules/
 # .vscode/ - commented out to allow settings configuration
 playwrightPractice/
 gitignore/
-results/
-
-results\playwright-report\cucumber-bootstrap-report.html
-results\playwright-report\cucumber-html-report.html
-results\playwright-report\cucumber-bootstrap-report.html.json
-results\playwright-report\cucumber-report.json
-results\playwright-report\cucumber-report.json;
-playwright-video/
+# Reports
+results/playwright-report/cucumber-bootstrap-report.html
+results/playwright-report/cucumber-html-report.html
+results/playwright-report/cucumber-bootstrap-report.html.json
+results/playwright-report/cucumber-report.json
+results/playwright-report/cucumber-report.json;
+results/videos/
+results/screenshots/
 
 

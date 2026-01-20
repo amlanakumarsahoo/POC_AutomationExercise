@@ -6,14 +6,15 @@ import { faker } from "@faker-js/faker";
 import { Given, When, Then, DataTable } from "@cucumber/cucumber";
 
 let signUpLoginPage: SignUpLoginPageOperations;
+let page = (this as any).page
 When('User Clicks on Signup', async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
     await signUpLoginPage.doSignUpLogin();
 });
 
 Then('user should be redirected to the signup page', async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     expect(await page.url().toLowerCase()).toContain('login');
 });
 
@@ -36,7 +37,7 @@ Then('user should be able to enter the fresh email address', async function () {
 });
 
 Then('user should be able to click on signup button', async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
     // First navigate to signup/login page
     await signUpLoginPage.doSignUp();
@@ -121,7 +122,7 @@ Then('user logout from the application', async function () {
 });
 
 Then('user should be on login page', async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     const currentUrl = page.url();
     const pageTitle = await page.title();
     expect(currentUrl.toLowerCase()).toContain('login');
@@ -141,7 +142,7 @@ Then('user should be able to enter existing email address {string}', async funct
 });
 
 Then('User signup and create account', {timeout: 10000}, async function (){
-    const page = (global as any).page;
+    page = (this as any).page
     signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
     await signUpLoginPage.createAccount();
 });

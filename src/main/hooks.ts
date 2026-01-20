@@ -2,6 +2,7 @@ import { Before, After, BeforeAll, AfterAll, AfterStep, setDefaultTimeout } from
 import { chromium, Browser, Page, BrowserContext } from 'playwright';
 import path from 'path';
 import fs from 'fs';
+import { TestWorld } from '../main/testworld';
 
 let browser: Browser;
 let context: BrowserContext;
@@ -32,22 +33,22 @@ AfterAll(async function () {
 });
 
 // Before each scenario
-Before({ timeout: 60000 }, async function () {
+Before({ timeout: 60000 }, async function (this: TestWorld) {
     console.log('🌟 Setting up browser for scenario...');
     
     try {
         // Launch browser
-        browser = await chromium.launch({ 
+        this.browser = await chromium.launch({ 
             headless: false,
             slowMo: 100 // Add slight delay for better visibility
         });
         
         // Create new context for each scenario (isolation)
-        const scenarioName = this.pickle?.name || 'unknown-scenario';
+        const scenarioName =(this as any).pickle?.name || 'unknown-scenario';
         const timestamp = Date.now();
         const videoPath = path.join(videosDir, `${scenarioName.replace(/\s+/g, '-')}-${timestamp}.webm`);
         
-        context = await browser.newContext({
+        context = await this.browser.newContext({
             viewport: { width: 1280, height: 720 },
             recordVideo: {
                 dir: videosDir,
@@ -62,10 +63,10 @@ Before({ timeout: 60000 }, async function () {
         page.setDefaultTimeout(60000); // 60 seconds for all operations
         page.setDefaultNavigationTimeout(60000); // 60 seconds for navigation
         
-        // Store in global scope for step definitions
-        (global as any).browser = browser;
-        (global as any).context = context;
-        (global as any).page = page;
+        // Store in Cucumber World s
+        (this as any).browser = this.browser;
+        (this as any).context = context;
+        (this as any).page = page;  
         
         console.log('✅ Browser setup completed successfully');
     } catch (error) {
@@ -128,8 +129,8 @@ After(async function (scenario) {
             console.log('🔒 Browser context closed');
             console.log(`🎥 Video saved to: ${videosDir}`);
         }
-        if (browser) {
-            await browser.close();
+        if (this.browser) {
+            await this.browser.close();
             console.log('🚪 Browser closed');
         }
         
@@ -139,7 +140,7 @@ After(async function (scenario) {
         // Continue with cleanup even if screenshot fails
         try {
             if (context) await context.close();
-            if (browser) await browser.close();
+            if (this.browser) await this.browser.close();
         } catch (cleanupError) {
             console.error('❌ Final cleanup failed:', cleanupError);
         }

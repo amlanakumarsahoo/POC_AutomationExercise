@@ -4,9 +4,9 @@ import { getCartPageApp } from "@src/main/utilities/autoExe-utils";
 import { expect } from "playwright/test";
 
 let cartPage:CartPageOperations;
-
+let page = (this as any).page
 Then('User clicks on Cart button', { timeout: 60000 }, async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     cartPage = await getCartPageApp(page) as CartPageOperations;
     await cartPage.navigateToCartPage();
 });
@@ -16,13 +16,13 @@ Then('user should be redirected to the cart page', async function () {
 });
 
 Then('User add first product to cart', async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     cartPage = await getCartPageApp(page) as CartPageOperations;
     await cartPage.addToCartFirstProduct();
 });
 
 Then('User click on continue shopping button', async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     cartPage = await getCartPageApp(page) as CartPageOperations;
     await cartPage.clickOnContinueShopping();
 });
@@ -32,7 +32,7 @@ Then('User add second product to cart', async function () {
 });
 
 Then('User navigates to cart page', async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     cartPage = await getCartPageApp(page) as CartPageOperations;
     await cartPage.navigateToCartPage();
 });

@@ -4,13 +4,15 @@ import { getAutoExeApp, getProductsPageApp } from '../../main/utilities/autoExe-
 import { expect, Page } from '@playwright/test';
 import { Given, When, Then } from '@cucumber/cucumber';
 
+
 export let homePage: HomePageOperations;
 export let productsPage: ProductsPageOperations;
 let actualResult: string | null;
-
+let page = (this as any).page
 // Use regular functions to access 'this'
 Given('User Visits HomePage', { timeout: 60000 }, async function () {
-    const page = (global as any).page;
+    // const page = (global as any).page;
+     page = (this as any).page;
     homePage = await getAutoExeApp(page) as HomePageOperations;
 });
 
@@ -46,7 +48,8 @@ Then('User should be able to verify subscription message {string}', async functi
 Then('User click on view product from home page', async function() {
     await homePage.clickOnViewProduct();
     // Initialize productsPage object after navigating to product details
-    const page = (global as any).page;
+    // const page = (global as any).page;
+    let page = (this as any).page
     productsPage = await getProductsPageApp(page) as ProductsPageOperations;
 });
 

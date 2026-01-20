@@ -3,10 +3,10 @@ import { getTestCaseApp } from "@src/main/utilities/autoExe-utils";
 import { TestCasePageOperations } from "@src/main/operations/TestCasePageOperations";
 import { expect } from "@playwright/test";
 export let testCasePage:TestCasePageOperations;
-
+let page = (this as any).page
 When('User Clicks on Test Cases tab', async function () {
     // Get page instance from hooks
-    const page = (global as any).page;
+    page = (this as any).page
     
     testCasePage = await getTestCaseApp(page) as TestCasePageOperations;
     await testCasePage.navigateToTestCase();

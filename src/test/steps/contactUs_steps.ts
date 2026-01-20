@@ -4,9 +4,9 @@ import { getContactUsApp } from "@src/main/utilities/autoExe-utils";
 import { Given, When, Then } from "@cucumber/cucumber";
 
 export let contactUsPage:ContactusOperations;
-
+let page = (this as any).page
 When('User Clicks on Contact Us', { timeout: 60000 }, async function () {
-    const page = (global as any).page;
+    page = (this as any).page
     contactUsPage = await getContactUsApp(page) as ContactusOperations;
     await contactUsPage.navigateToContactUs();
 });

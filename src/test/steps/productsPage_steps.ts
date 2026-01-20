@@ -68,10 +68,14 @@ Then('User click on Add to cart button', async function () {
 });
 
 Then('User select brand from products page {string}', async function (brand: string) {
+    page = (global as any).page;
+    const productsPage = await getProductsPageApp(page) as ProductsPageOperations;
     await productsPage.selectBrandFromProductsPage(brand);
 });
 
 Then('selected brand products should be displayed {string}', async function (expectedTitle: string) {
+    page = (global as any).page;
+    const productsPage = await getProductsPageApp(page) as ProductsPageOperations;
     const actualTitle = await productsPage.verifySelectedBrandProducts();
     expect(actualTitle).toContain(expectedTitle);
 });
@@ -89,13 +93,17 @@ Then('User verifies product details', async function () {
     expect(await localProductsPage.verifySearchResultsProductDetails()).toBeTruthy();
 });
 
-Then('User write review details', async function (dataTable: DataTable) {
+Then('User write review details', async function (dataTable: DataTable) { 
     const data = dataTable.hashes()[0]; // Get first row of data table
-    await productsPage.writeReviewDetails(data.name, data.email, data.review);
+    const name = data.name;
+    const email = data.emailAddress;
+    const review = data.review;
+    await productsPage.writeReviewDetails(name, email, review);
 });
+
 Then('User submit review', async function () {
     await productsPage.submitReview();
-});
+}); 
 Then('User verifies review submitted', async function () {
     expect(await productsPage.verifyReviewSubmitted()).toBeTruthy();
 });

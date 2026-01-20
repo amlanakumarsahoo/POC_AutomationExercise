@@ -39,12 +39,12 @@ Then('user should be able to click on signup button', async function () {
     const page = (global as any).page;
     signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
     // First navigate to signup/login page
-    await signUpLoginPage.doSignUpLogin();
-    // Fill in fresh user name and email
-    await signUpLoginPage.getFreshUserName(faker.person.firstName());
-    await signUpLoginPage.getFreshEmailAddress(faker.internet.email());
-    // Then click the signup button
     await signUpLoginPage.doSignUp();
+    // Fill in fresh user name and email
+    // await signUpLoginPage.getFreshUserName(faker.person.firstName());
+    // await signUpLoginPage.getFreshEmailAddress(faker.internet.email());
+    // Then click the signup button
+    // await signUpLoginPage.doSignUp();
 });
 
 Then('user should be able to verify creation of new user', async function () {

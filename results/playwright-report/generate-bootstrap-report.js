@@ -31,7 +31,7 @@ const options = {
     // Ensure example tables are displayed properly
     reportSuiteAsScenarios: false, // Changed to false for better outline support
     metadata: {
-        "App Name": "OrangeHRM Test Automation",
+        "App Name": "Automation Exercise POC",
         "Test Environment": "STAGING",
         "Browser": "Chrome",
         "Platform": "Windows 10",

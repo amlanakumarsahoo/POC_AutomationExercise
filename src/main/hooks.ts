@@ -89,7 +89,7 @@ AfterStep(async function (step) {
             
             // Attach screenshot to Cucumber report
             this.attach(screenshot, 'image/png');
-            console.log(`📷 Step screenshot captured: ${screenshotPath}`);
+           // console.log(`📷 Step screenshot captured: ${screenshotPath}`);
         }
     } catch (error) {
         console.error('⚠️ Error capturing step screenshot:', error);

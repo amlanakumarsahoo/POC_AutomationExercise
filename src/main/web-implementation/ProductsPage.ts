@@ -59,7 +59,8 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         this.searchProductBtn = page.getByRole('button', { name: '' })
         this.productQuantityInput = page.locator('#quantity');
         this.addToCartBtn = page.getByRole('button', { name: ' Add to cart' })
-        this.productTitle = page.locator('.title.text-center');
+        //this.productTitle = page.locator('.title.text-center');
+        this.productTitle = page.getByRole('heading', { name: /Brand - .* Products/ })
         this.searchProductsPageProductPrice = page.getByRole('heading', { name: 'Rs.' }).nth(1)
         this.searchProductsPageProductName = page.getByText('Blue Top').nth(1)
         this.searchProductsPageAddToCartBtn = page.getByText('Add to cart').nth(1)
@@ -140,7 +141,7 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
         try {
             brandName = brandName.trim();
             const brand = `//a[@href='/brand_products/${brandName}']`;
-            const brandElement = this.page.locator(brand);
+            const brandElement = this.page.locator(brand, { timeout: 5000 });
 
             // Wait for the brand element to be visible
             await brandElement.waitFor({ state: 'visible', timeout: 10000 });
@@ -182,11 +183,11 @@ export class ProductsPage extends BasePage implements ProductsPageOperations {
     //Write review details
     async writeReviewDetails(name: string, email: string, review: string): Promise<void> {
         
-        if(await this.writeYourReviewHeader.isVisible()){
+        // if(await this.writeYourReviewHeader.isVisible()){
         await this.writeYourReviewName.fill(name);
         await this.writeYourReviewEmail.fill(email);
         await this.writeYourReviewReview.fill(review);
-    }
+   // }
     }
     //Submit review
     async submitReview(): Promise<void> {

@@ -7,18 +7,13 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "PlaywrightPractice/P1.ts",
-    "google-search": "npx ts-node PlaywrightPractice/google-search.ts",
-    "cucumber": "cucumber-js src/test/features/googleSearch.feature --config cucumber.config.js",
-    "cucumber-regression": "cucumber-js src/test/features/ --tags @Regression --config cucumber.config.js",
-    "cucumber-regression-json": "cucumber-js src/test/features/ --tags @Regression --config cucumber.config.js --format json:results/playwright-report/cucumber-report.json",
+    "cucumber-regression-json": "cucumber-js src/test/features/ --tags @Regression --config --format json:results/playwright-report/cucumber-report.json",
     "cleanup-reports": "node results/playwright-report/cleanup-reports.js",
     "generate-bootstrap-report": "node results/playwright-report/generate-bootstrap-report.js",
     "test-with-bootstrap-report": "npm run cleanup-reports && npm run cucumber-regression-json; npm run generate-bootstrap-report",
-    "test_regression": "npm run cleanup-reports && cucumber-js src/test/features/ --tags @Regression --config cucumber.config.js --format json:results/playwright-report/cucumber-report.json; npm run generate-bootstrap-report",
-    "test_Single": "cucumber-js src/test/regression/ --tags @TC024 --config cucumber.config.js",
-    "test_amlana": "npm run cleanup-reports && cucumber-js src/test/features/ --tags @PlaceOrder --config cucumber.config.js --format json:results/playwright-report/cucumber-report.json; npm run generate-bootstrap-report",
-    "generate_report": "node results/playwright-report/generate-bootstrap-report.js"
+    "test_regression": "npm run cleanup-reports && cucumber-js src/test/features/ --tags @Regression --format json:results/playwright-report/cucumber-report.json; npm run generate-bootstrap-report",
+    "test_Single": "cucumber-js src/test/features/ --tags @TC024",
+    "test_amlana": "npm run cleanup-reports && cucumber-js src/test/features/ --tags @PlaceOrder --format json:results/playwright-report/cucumber-report.json; npm run generate-bootstrap-report"
   },
   "dependencies": {
     "@cucumber/cucumber": "^12.5.0",

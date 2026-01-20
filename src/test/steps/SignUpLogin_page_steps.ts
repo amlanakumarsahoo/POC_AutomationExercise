@@ -4,67 +4,59 @@ import { SignUpLoginPageOperations } from "@src/main/operations/SignUpLoginPageO
 import { getSignUpLoginApp } from "@src/main/utilities/autoExe-utils";
 import { faker } from "@faker-js/faker";
 import { Given, When, Then, DataTable } from "@cucumber/cucumber";
+import { TestWorld } from "@src/main/testworld";
 
 let signUpLoginPage: SignUpLoginPageOperations;
-let page = (this as any).page
-When('User Clicks on Signup', async function () {
-    page = (this as any).page
-    signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
+//let page = (this as any).page
+When('User Clicks on Signup', async function (this:TestWorld) {
+    signUpLoginPage = await getSignUpLoginApp(this.page) as SignUpLoginPageOperations;
     await signUpLoginPage.doSignUpLogin();
 });
 
-Then('user should be redirected to the signup page', async function () {
-    page = (this as any).page
-    expect(await page.url().toLowerCase()).toContain('login');
+Then('user should be redirected to the signup page', async function (this:TestWorld) {
+    expect(await this.page.url().toLowerCase()).toContain('login');
 });
 
-Then('user should be able to enter the username {string}', async function (username: string) {
+Then('user should be able to enter the username {string}', async function (this:TestWorld,username: string) {
     await signUpLoginPage.getUserName(username);
 });
-
-Then('user should be able to enter the fresh user', async function () {
+    
+Then('user should be able to enter the fresh user', async function (this:TestWorld) {
     const username = faker.person.firstName();
     await signUpLoginPage.getFreshUserName(username);
 });
 
-Then('user should be able to enter the email address {string}', async function (emailaddress: string) {
+Then('user should be able to enter the email address {string}', async function (this:TestWorld,emailaddress: string) {
     await signUpLoginPage.getEmailAddress(emailaddress);
 });
 
-Then('user should be able to enter the fresh email address', async function () {
+Then('user should be able to enter the fresh email address', async function (this:TestWorld) {
     const emailaddress = faker.internet.email();
     await signUpLoginPage.getFreshEmailAddress(emailaddress);
 });
 
-Then('user should be able to click on signup button', async function () {
-    page = (this as any).page
-    signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
+Then('user should be able to click on signup button', async function (this:TestWorld) {
+    signUpLoginPage = await getSignUpLoginApp(this.page) as SignUpLoginPageOperations;
     // First navigate to signup/login page
     await signUpLoginPage.doSignUp();
-    // Fill in fresh user name and email
-    // await signUpLoginPage.getFreshUserName(faker.person.firstName());
-    // await signUpLoginPage.getFreshEmailAddress(faker.internet.email());
-    // Then click the signup button
-    // await signUpLoginPage.doSignUp();
+
 });
 
-Then('user should be able to verify creation of new user', async function () {
+Then('user should be able to verify creation of new user', async function (this:TestWorld) {
     const newCreatedUser = await signUpLoginPage.verifyCreationOfNewUser();
     expect(newCreatedUser).toBeTruthy();
 });
-// Then('user fill the user information', async function () {
-//     await signUpLoginPage.fillUserInfo();
-// });
-Then('user fill the user password information', async function () {
+
+Then('user fill the user password information', async function (this:TestWorld) {
     await signUpLoginPage.getUserPassword();
 });
-Then('user fill the user DOB information', async function () {
+Then('user fill the user DOB information', async function (this:TestWorld) {
     await signUpLoginPage.getUserDOB();
 });
-Then('user fill the user news letter information', async function () {
+Then('user fill the user news letter information', async function (this:TestWorld) {
     await signUpLoginPage.getSignUpNewsLetter();
 });
-Then('user fill the user special offers information', async function () {
+Then('user fill the user special offers information', async function (this:TestWorld) {
     await signUpLoginPage.getReceiveSpecialOffers();
 });
 Then('user fill the user address information', async function (dataTable: DataTable) {
@@ -77,23 +69,23 @@ Then('user fill the user address information', async function (dataTable: DataTa
         data.mobileNumber
     );
 });
-Then('user should be able to submit the signup form', async function () {
+Then('user should be able to submit the signup form', async function (this:TestWorld) {
     await signUpLoginPage.doSubmitForm();
 });
-Then('user should be able to verify account created confirmation', async function () {
+Then('user should be able to verify account created confirmation', async function (this:TestWorld) {
     const accountCreatedConfirmation = await signUpLoginPage.getAccountCreatedConfirmation();
     expect(accountCreatedConfirmation).toBeTruthy();
 });
-Then('user clicks on continue button', async function () {
+Then('user clicks on continue button', async function (this:TestWorld) {
     await signUpLoginPage.doContinue();
 });
-Then('user should be able to verify loggedin user', async function () {
+Then('user should be able to verify loggedin user', async function (this:TestWorld) {
     expect(await signUpLoginPage.getLoggedInUser()).toContain('Logged in as');
 });
-Then('user should able to delete the account', async function () {
+Then('user should able to delete the account', async function (this:TestWorld) {
     await signUpLoginPage.deleteAccount();
 });
-Then('user verify the account deleted confirmation', async function () {
+Then('user verify the account deleted confirmation', async function (this:TestWorld) {
     const accountDeletedConfirmation = await signUpLoginPage.getAccountDeletedConfirmation();
     expect(accountDeletedConfirmation).toBeTruthy();
 });
@@ -112,19 +104,18 @@ Then('user login with incorrect email and password', async function (dataTable) 
         data.password
     );
 });
-Then('user should be able to verify login failed confirmation', async function () {
+Then('user should be able to verify login failed confirmation', async function (this:TestWorld) {
     const loginFailedConfirmation = await signUpLoginPage.getLoginFailedConfirmation();
     expect(loginFailedConfirmation).toBeTruthy();
 });
 
-Then('user logout from the application', async function () {
+Then('user logout from the application', async function (this:TestWorld) {
     await signUpLoginPage.logout(); 
 });
 
-Then('user should be on login page', async function () {
-    page = (this as any).page
-    const currentUrl = page.url();
-    const pageTitle = await page.title();
+Then('user should be on login page', async function (this:TestWorld) {
+    const currentUrl = this.page.url();
+    const pageTitle = await this.page.title();
     expect(currentUrl.toLowerCase()).toContain('login');
     expect(pageTitle.toLowerCase()).toContain('login');
 });
@@ -141,8 +132,7 @@ Then('user should be able to enter existing email address {string}', async funct
     await signUpLoginPage.getEmailAddress(emailaddress);
 });
 
-Then('User signup and create account', {timeout: 10000}, async function (){
-    page = (this as any).page
-    signUpLoginPage = await getSignUpLoginApp(page) as SignUpLoginPageOperations;
+Then('User signup and create account', {timeout: 10000}, async function (this:TestWorld){
+    signUpLoginPage = await getSignUpLoginApp(this.page) as SignUpLoginPageOperations;
     await signUpLoginPage.createAccount();
 });

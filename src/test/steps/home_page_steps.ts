@@ -3,20 +3,17 @@ import { ProductsPageOperations } from '../../main/operations/ProductsPageOperat
 import { getAutoExeApp, getProductsPageApp } from '../../main/utilities/autoExe-utils';
 import { expect, Page } from '@playwright/test';
 import { Given, When, Then } from '@cucumber/cucumber';
-
+import { TestWorld } from "@src/main/testworld";
 
 export let homePage: HomePageOperations;
 export let productsPage: ProductsPageOperations;
 let actualResult: string | null;
-let page = (this as any).page
-// Use regular functions to access 'this'
-Given('User Visits HomePage', { timeout: 60000 }, async function () {
-    // const page = (global as any).page;
-     page = (this as any).page;
-    homePage = await getAutoExeApp(page) as HomePageOperations;
+
+Given('User Visits HomePage', { timeout: 60000 }, async function (this:TestWorld) {
+    homePage = await getAutoExeApp(this.page) as HomePageOperations;
 });
 
-When('User Observes HomePage Title', async function () {
+When('User Observes HomePage Title', async function (this:TestWorld) {
     actualResult = await homePage.getTitle();
 });
 
@@ -24,7 +21,7 @@ Then('title should match {string}', async function (_arg: string) {
     expect(actualResult).toEqual(_arg);
 });
 
-When('User Observes sub Title', async function () {
+When('User Observes sub Title', async function (this:TestWorld) {
     actualResult = await homePage.getSubTitle();
 });
 
@@ -32,11 +29,11 @@ Then('sub title should match {string}', async function (_arg: string) {
     expect(actualResult).toEqual(_arg);
 });
 
-  When('Subscription should be visible', async function () {
+  When('Subscription should be visible', async function (this:TestWorld) {
     expect(await homePage.getSubscriptionHeader()).toBeTruthy();
 });
 
-When('User enters email id and clicks on subscribe button', async function () {
+When('User enters email id and clicks on subscribe button', async function (this:TestWorld) {
     await homePage.enterEmailIdAndClickSubscribeButton();
 });
 
@@ -47,16 +44,14 @@ Then('User should be able to verify subscription message {string}', async functi
 
 Then('User click on view product from home page', async function() {
     await homePage.clickOnViewProduct();
-    // Initialize productsPage object after navigating to product details
-    // const page = (global as any).page;
-    let page = (this as any).page
-    productsPage = await getProductsPageApp(page) as ProductsPageOperations;
+
+    productsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
 });
 
-Then('User clicks on Scroll Up button with Arrow button', async function () {
+Then('User clicks on Scroll Up button with Arrow button', async function (this:TestWorld) {
     await homePage.clickOnScrollUpButton();
 });
 
-Then('User clicks on Scroll Up button without Arrow button', async function () {
+Then('User clicks on Scroll Up button without Arrow button', async function (this:TestWorld) {
     await homePage.clickOnScrollUpButtonWithoutArrow();
 });

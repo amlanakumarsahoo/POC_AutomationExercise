@@ -4,56 +4,48 @@ import { ProductsPageOperations } from '../../main/operations/ProductsPageOperat
 import { getProductsPageApp } from '../../main/utilities/autoExe-utils';
 import { productsPage } from './home_page_steps';
 import { verify } from 'crypto';
+import { TestWorld } from "@src/main/testworld";
 
-// let page = (global as any).page;
-let page = (this as any).page
+
 // Step: Navigate to Products tab
-When('User navigates to Products tab', async function () {
-    // page = (global as any).page;
-     page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+When('User navigates to Products tab', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     await localProductsPage.navigateToProductsPage();
 });
 
 // Step: Verify redirect to All Products page
-Then('User should be redirected to All Products page', async function () {
-     page = (this as any).page
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User should be redirected to All Products page', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     expect(await localProductsPage.verifyAllProductsPage()).toBe('All Products');
 });
 
 // Step: Verify product list is not empty
-Then('User verifies product list', async function () {
-    page = (this as any).page
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User verifies product list', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     expect(await localProductsPage.verifyProductListCount()).toBeGreaterThan(0);
 });
 
 // Step: Click on first product
-Then('User clicks on first product', async function () {
-    page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User clicks on first product', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     await localProductsPage.viewFirstProduct();
 });
 
 // Step: Verify product details page
-Then('User landed to product detail page', async function () {
-    page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User landed to product detail page', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     expect(await localProductsPage.verifyProductDetails()).toBeTruthy();
 });
 
 // Step: Verify product attributes
-Then('User verifies product name, category, price, availability, condition, brand', async function () {
-     page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User verifies product name, category, price, availability, condition, brand', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     expect(await localProductsPage.verifyProductDetails()).toBeTruthy();
 });
 
 // Step: Search for product
 Then('User search for product {string}', async function (productName: string) {
-     page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     await localProductsPage.searchProduct(productName);
 });
 
@@ -65,33 +57,30 @@ Then('User increse the product quantity to {string}', async function (quantitySt
 });
 
 // Step: Click on Add to cart button
-Then('User click on Add to cart button', async function () {
+Then('User click on Add to cart button', async function (this:TestWorld) {
+    const productsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     await productsPage.addToCart();
 });
 
-Then('User select brand from products page {string}', async function (brand: string) {
-     page = (this as any).page;
-    const productsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User select brand from products page {string}', async function (this:TestWorld,brand: string) {
+    const productsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     await productsPage.selectBrandFromProductsPage(brand);
 });
 
-Then('selected brand products should be displayed {string}', async function (expectedTitle: string) {
-     page = (this as any).page;
-    const productsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('selected brand products should be displayed {string}', async function (this:TestWorld,expectedTitle: string) {
+    const productsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     const actualTitle = await productsPage.verifySelectedBrandProducts();
     expect(actualTitle).toContain(expectedTitle);
 });
 
 Then('User verifies {string} is visible', async function (expectedText: string) {
-     page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     const actualPageTitle = await localProductsPage.verifySearchedProductsPage();
     expect(actualPageTitle).toContain(expectedText);
 });
 
-Then('User verifies product details', async function () {
-     page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User verifies product details', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     expect(await localProductsPage.verifySearchResultsProductDetails()).toBeTruthy();
 });
 
@@ -103,70 +92,59 @@ Then('User write review details', async function (dataTable: DataTable) {
     await productsPage.writeReviewDetails(name, email, review);
 });
 
-Then('User submit review', async function () {
+Then('User submit review', async function (this:TestWorld) {
     await productsPage.submitReview();
 }); 
-Then('User verifies review submitted', async function () {
+Then('User verifies review submitted', async function (this:TestWorld) {
     expect(await productsPage.verifyReviewSubmitted()).toBeTruthy();
 });
 
 // Step: Add recommended items to cart
-Then('User add recommended items to cart', async function () {
-     page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User add recommended items to cart', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     await localProductsPage.addRecommendedItemsToCart();
 });
 
 // Step: Verify recommended items
-Then('User verify "RECOMMENDED ITEMS" is visible', async function () {
-     page = (this as any).page;
-    const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+Then('User verify "RECOMMENDED ITEMS" is visible', async function (this:TestWorld) {
+    const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
     expect(await localProductsPage.verifyRecommendedItems()).toBeTruthy();
 });
 
     // Step: User click on view cart link
-    Then('User click on view cart link', async function () {
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('User click on view cart link', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         await localProductsPage.clickOnViewCartLink();
     });
     
-    Then('User verify "Category" is visible', async function () {
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('User verify "Category" is visible', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         expect(await localProductsPage.verifyCategoryHeader()).toContain('Category');
     });
-    Then('User click on women category', async function () {
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('User click on women category', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         await localProductsPage.selectWomenCategory();
     });
-    Then('User click on dress subcategory', async function () {
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('User click on dress subcategory', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         await localProductsPage.selectDressSubcategory();
     });
-    Then('User click on men category', async function () {
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('User click on men category', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         await localProductsPage.selectMenCategory();
     });
-    Then('User click on tshirts subcategory', async function () {
-        
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('User click on tshirts subcategory', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         await localProductsPage.selectTshirtsSubcategory();
     });
     
-    Then('verify women dress subcategory products are visible', async function () {
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('verify women dress subcategory products are visible', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         expect(await localProductsPage.verifyWomenDressSubCategoryProductsAreVisible()).toBeTruthy();
     });
     
-    Then('verify men tshirts subcategory products are visible', async function () {
-         page = (this as any).page;
-        const localProductsPage = await getProductsPageApp(page) as ProductsPageOperations;
+    Then('verify men tshirts subcategory products are visible', async function (this:TestWorld) {
+        const localProductsPage = await getProductsPageApp(this.page) as ProductsPageOperations;
         expect(await localProductsPage.verifyMenTshirtsSubCategoryProductsAreVisible()).toBeTruthy();
     });
     

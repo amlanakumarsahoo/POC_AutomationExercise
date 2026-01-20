@@ -2,16 +2,16 @@ import { ContactusOperations } from "@src/main/operations/ContactusOperations";
 import { expect } from "@playwright/test";
 import { getContactUsApp } from "@src/main/utilities/autoExe-utils";
 import { Given, When, Then } from "@cucumber/cucumber";
+import { TestWorld } from "@src/main/testworld";
 
 export let contactUsPage:ContactusOperations;
-let page = (this as any).page
-When('User Clicks on Contact Us', { timeout: 60000 }, async function () {
-    page = (this as any).page
-    contactUsPage = await getContactUsApp(page) as ContactusOperations;
+
+When('User Clicks on Contact Us', { timeout: 60000 }, async function (this:TestWorld) {
+    contactUsPage = await getContactUsApp(this.page) as ContactusOperations;
     await contactUsPage.navigateToContactUs();
 });
 
-Then('user should be redirected to the contact us page', async function () {
+Then('user should be redirected to the contact us page', async function (this:TestWorld) {
     let actualResult = await contactUsPage.getContactUsTitle();
     expect(actualResult).toBeTruthy();  
 });
@@ -30,24 +30,24 @@ When('User attaches a file', async function (dataTable) {
     await contactUsPage.attachFile(data.filepath);
 });
 
-When('User submits the contact us form', { timeout: 60000 }, async function () {
+When('User submits the contact us form', { timeout: 60000 }, async function (this:TestWorld) {
     await contactUsPage.submitContactUsForm();
 });
 
-Then('user should be able to press ok button', async function () {
+Then('user should be able to press ok button', async function (this:TestWorld) {
     await contactUsPage.doPressOk();
 });
 
-Then('user should be able to verify contact us confirmation', async function () {
+Then('user should be able to verify contact us confirmation', async function (this:TestWorld) {
     let actualResult = await contactUsPage.getContactUsConfirmation();
     expect(actualResult).toBeTruthy();  
 });
 
-When('user navigate to home page', async function () {
+When('user navigate to home page', async function (this:TestWorld) {
     await contactUsPage.navigateToHomePage();
 });
 
-Then('user should be able to verify home page title', async function () {
+Then('user should be able to verify home page title', async function (this:TestWorld) {
     let actualResult = await contactUsPage.getHomePageTitle();
     expect(actualResult).toBe('Automation Exercise');
 });
